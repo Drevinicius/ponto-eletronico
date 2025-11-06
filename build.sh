@@ -2,11 +2,12 @@
 # Exit on error
 set -o errexit
 
-# Install dependencies
+# Update pip and install dependencies
+pip install --upgrade pip
 pip install -r requirements.txt
 
-# Collect static files
+# Convert static asset files
 python manage.py collectstatic --no-input
 
-# Apply database migrations
+# Apply any outstanding database migrations
 python manage.py migrate
