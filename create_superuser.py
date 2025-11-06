@@ -3,7 +3,6 @@ import os
 import django
 import sys
 
-# Configurar Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ponto.settings')
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
@@ -15,12 +14,14 @@ User = get_user_model()
 
 
 def create_superuser():
-    # Dados do superuser - ALTERE AQUI!
-    username = "admin"
-    email = "admin@empresa.com"
-    password = "123"  # ⚠️ ALTERE PARA UMA SENHA SEGURA!
+    username = os.environ.get('SUPERUSER_USERNAME', 'admin')
+    email = os.environ.get('SUPERUSER_EMAIL', 'admin@empresa.com')
+    password = os.environ.get('SUPERUSER_PASSWORD', 'Admin123!')
 
-    # Verificar se já existe
+    if not username or not password:
+        print("❌ Variáveis de superuser não configuradas")
+        return
+
     if not User.objects.filter(username=username).exists():
         User.objects.create_superuser(
             username=username,
@@ -28,10 +29,8 @@ def create_superuser():
             password=password
         )
         print(f"✅ Superuser '{username}' criado com sucesso!")
-        print(f"📧 Email: {email}")
-        print(f"🔑 Password: {password}")
     else:
-        print("ℹ️ Superuser já existe!")
+        print(f"ℹ️ Superuser '{username}' já existe!")
 
 
 if __name__ == "__main__":
