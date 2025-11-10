@@ -34,50 +34,78 @@
         .botao-ponto:active {
             transform: scale(0.95);
         }
-        .botao-verde {
+        .gradient-orange {
+            background: linear-gradient(135deg, #ff6b00 0%, #ff8c00 100%);
+        }
+        .gradient-green {
             background: linear-gradient(135deg, #10b981, #059669);
+        }
+        .gradient-red {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        .shadow-orange {
+            box-shadow: 0 10px 40px rgba(255, 107, 0, 0.3);
+        }
+        .shadow-green {
             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
         }
-        .botao-vermelho {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
+        .shadow-red {
             box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+        }
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
+        }
+        .btn-hover {
+            transition: all 0.3s ease;
         }
         .pulse-animation {
             animation: pulse 2s infinite;
+        }
+        .pulse-orange {
+            animation: pulseOrange 2s ease-in-out infinite;
         }
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
+        @keyframes pulseOrange {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 107, 0, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255, 107, 0, 0.8);
+            }
+        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
-    <header class="bg-white shadow-sm border-b border-gray-200">
+<body class="bg-black min-h-screen">
+    <header class="bg-gradient-to-r from-gray-900 to-black shadow-lg border-t-4 border-orange-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-3">
-                    <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <div class="w-10 h-10 gradient-orange rounded-lg flex items-center justify-center shadow-orange">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 2L3 7v11a2 2 0 002 2h10a2 2 0 002-2V7l-7-5z"/>
                         </svg>
                     </div>
-                    <h1 class="text-xl font-semibold text-gray-900">AM Gráfica</h1>
+                    <h1 class="text-xl font-bold text-white">AM Gráfica</h1>
                 </div>
 
                 <div class="flex items-center space-x-4">
-                    <div class="text-sm text-gray-600 hidden sm:block">
+                    <div class="text-sm text-gray-400 hidden sm:block font-medium">
                         Sistema de Controle de Ponto
                     </div>
                     <button onclick="window.location.href = '{% url "main:historico" %}'"
-                            class="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors">
+                            class="flex items-center space-x-2 px-4 py-2 text-sm font-bold text-white gradient-orange rounded-lg btn-hover">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                         <span>Histórico</span>
                     </button>
                     <button id="logoutButton"
-                            class="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors">
+                            class="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-white bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
                         </svg>
@@ -92,39 +120,39 @@
         <!-- Tela de Bater Ponto -->
         <div id="pontoScreen" class="fade-in">
             <div class="max-w-4xl mx-auto">
-                <div class="bg-white rounded-2xl shadow-xl p-8">
+                <div class="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-orange p-8 border-2 border-orange-500">
                     <!-- Cabeçalho -->
                     <div class="text-center mb-8">
-                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-24 h-24 gradient-orange rounded-full flex items-center justify-center mx-auto mb-4 pulse-orange">
+                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </div>
-                        <h2 class="text-3xl font-bold text-gray-900">Registro de Ponto</h2>
-                        <p class="text-gray-600 mt-2">Clique no botão para registrar entrada ou saída</p>
+                        <h2 class="text-3xl font-bold text-white">Registro de Ponto</h2>
+                        <p class="text-gray-400 mt-2">Clique no botão para registrar entrada ou saída</p>
                     </div>
 
                     <!-- Data e Hora -->
                     <div class="text-center mb-8">
-                        <div class="inline-flex flex-col items-center bg-gray-50 rounded-lg px-6 py-4">
-                            <span class="text-2xl font-bold text-gray-900" id="currentDate">--/--/----</span>
-                            <span class="text-4xl font-bold text-indigo-600 mt-2" id="currentTime">--:--:--</span>
+                        <div class="inline-flex flex-col items-center bg-black rounded-xl px-8 py-6 border-2 border-gray-800">
+                            <span class="text-2xl font-bold text-white" id="currentDate">--/--/----</span>
+                            <span class="text-5xl font-bold text-orange-500 mt-3" id="currentTime">--:--:--</span>
                         </div>
                     </div>
 
                     <!-- Funcionário -->
                     <div class="text-center mb-8">
-                        <p class="text-sm text-gray-600 mb-2">Funcionário</p>
+                        <p class="text-sm text-orange-500 mb-2 font-semibold">Funcionário</p>
                         <div id="nomeFuncionarioCampo"
-                             class="inline-block px-6 py-3 border border-gray-300 rounded-lg text-gray-800 bg-gray-100 font-semibold text-lg">
+                             class="inline-block px-6 py-3 border-2 border-orange-500 rounded-lg text-white bg-gray-800 font-bold text-lg">
                             Carregando Nome...
                         </div>
                         <input type="hidden" id="funcionarioId" name="funcionarioId" required>
                     </div>
 
                     <!-- Último Registro -->
-                    <div id="ultimoRegistroInfo" class="hidden text-center mb-6 p-4 bg-blue-50 rounded-lg">
-                        <p class="text-sm text-blue-800">
+                    <div id="ultimoRegistroInfo" class="hidden text-center mb-6 p-4 bg-orange-500 bg-opacity-20 rounded-lg border border-orange-500">
+                        <p class="text-sm text-orange-400">
                             <span class="font-semibold">Último ponto:</span>
                             <span id="ultimoRegistroTexto">-</span>
                         </p>
@@ -133,7 +161,7 @@
                     <!-- BOTÃO CENTRALIZADO GRANDE -->
                     <div class="flex justify-center items-center my-8">
                         <button id="botaoPonto"
-                                class="botao-ponto w-72 h-72 rounded-full text-white font-bold text-2xl flex flex-col items-center justify-center transition-all duration-300 pulse-animation">
+                                class="botao-ponto w-72 h-72 rounded-full text-white font-bold text-2xl flex flex-col items-center justify-center transition-all duration-300 pulse-animation gradient-orange shadow-orange btn-hover">
                             <span id="textoBotao">CARREGANDO</span>
                             <span id="subtituloBotao" class="text-lg font-normal mt-4 opacity-90">Clique para registrar</span>
                         </button>
@@ -141,7 +169,7 @@
 
                     <!-- Dica -->
                     <div class="text-center mt-6">
-                        <p class="text-sm text-gray-500" id="dicaBotao">
+                        <p class="text-sm text-gray-400" id="dicaBotao">
                             O sistema detecta automaticamente se é entrada ou saída
                         </p>
                     </div>
@@ -235,7 +263,6 @@
         // ----------------------------------------------------------------------
 
         // Buscar último ponto do funcionário
-        // Buscar último ponto do funcionário - VERSÃO ROBUSTA
         async function buscarUltimoPonto() {
             if (!usuarioLogado) return;
 
@@ -255,8 +282,7 @@
                 // Mostrar último registro se existir
                 if (data.ultimo_timestamp) {
                     try {
-                        // 🆕 CONVERSÃO ROBUSTA PARA HORÁRIO LOCAL
-                        // O timestamp vem no formato "22/10/2025 18:30"
+                        // CONVERSÃO PARA HORÁRIO LOCAL
                         const [dataPart, horaPart] = data.ultimo_timestamp.split(' ');
                         const [dia, mes, ano] = dataPart.split('/');
                         const [hora, minuto] = horaPart.split(':');
@@ -288,13 +314,13 @@
         function atualizarBotaoPonto() {
             if (proximoTipo === 'E') {
                 // Verde - Entrada
-                botaoPonto.className = 'botao-ponto w-72 h-72 rounded-full text-white font-bold text-2xl flex flex-col items-center justify-center transition-all duration-300 pulse-animation botao-verde';
+                botaoPonto.className = 'botao-ponto w-72 h-72 rounded-full text-white font-bold text-2xl flex flex-col items-center justify-center transition-all duration-300 pulse-animation gradient-green shadow-green btn-hover';
                 textoBotao.textContent = 'ENTRADA';
                 subtituloBotao.textContent = 'Clique para iniciar o trabalho';
                 dicaBotao.textContent = 'Próximo: início do expediente';
             } else {
                 // Vermelho - Saída
-                botaoPonto.className = 'botao-ponto w-72 h-72 rounded-full text-white font-bold text-2xl flex flex-col items-center justify-center transition-all duration-300 pulse-animation botao-vermelho';
+                botaoPonto.className = 'botao-ponto w-72 h-72 rounded-full text-white font-bold text-2xl flex flex-col items-center justify-center transition-all duration-300 pulse-animation gradient-red shadow-red btn-hover';
                 textoBotao.textContent = 'SAÍDA';
                 subtituloBotao.textContent = 'Clique para encerrar';
                 dicaBotao.textContent = 'Próximo: fim do expediente';
