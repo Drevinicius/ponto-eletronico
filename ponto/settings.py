@@ -143,7 +143,7 @@ USE_I18N = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-LOGOUT_REDIRECT_URL = ''
+LOGOUT_REDIRECT_URL =  os.environ.get('LOGOUT_REDIRECT_URL', '/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -162,7 +162,6 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
 
-    # Configurações adicionais de segurança - ✅ ADICIONE TAMBÉM
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
